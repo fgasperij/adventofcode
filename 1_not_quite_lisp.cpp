@@ -4,7 +4,7 @@
 
 using namespace std;
 
-int solve_first() {
+int main() {
   ifstream ifile("io/day_1_1.in");
   if (!ifile.is_open()) {
     cout << "Couldn't open the file!\n";
@@ -14,45 +14,18 @@ int solve_first() {
   string line;
   ifile >> line;
   int floor = 0;
+  int position = -1;
   while (!ifile.eof()) {
     for (int i = 0; i < line.size(); ++i) {
       if (line[i] == '(') ++floor;
       if (line[i] == ')') --floor;
+      if (floor == -1 && position == -1) position = i+1;
     }
     ifile >> line;
   }
 
-  return floor;
-}
-
-int solve_second() {
-  ifstream ifile("io/day_1_2.in");
-  if (!ifile.is_open()) {
-    cout << "Couldn't open the file!\n";
-    return 1;
-  }
-
-  string line;
-  ifile >> line;
-  int position = 1;
-  int floor = 0;
-  while (!ifile.eof()) {
-    for (int i = 0; i < line.size(); ++i) {
-      if (line[i] == '(') ++floor;
-      if (line[i] == ')') --floor;
-      if (floor == -1) return position;
-      ++position;
-    }
-    ifile >> line;
-  }
-
-  return -1;
-}
-
-int main() {
-
-  cout << "To floor " << solve_first() << '\n';
-  cout << "Position he enters the basement " << solve_second() << '\n';
+  cout << "To floor " << floor << '\n';
+  cout << "Position he enters the basement " << position << '\n';
 
   return 0;
 }
