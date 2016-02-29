@@ -12,12 +12,11 @@ update_floor :: Char -> Int -> Int
 update_floor '(' r = r + 1
 update_floor ')' r = r - 1
 
--- with foldr?
 first_basement :: [Char] -> Int
-first_basement cs  = first_basement_aux cs 0 1
+first_basement cs  = fb_aux cs 0 1
 
-first_basement_aux :: [Char] -> Int -> Int -> Int
-first_basement_aux [] _ _ = -1
-first_basement_aux (')':_) 0 i = i
-first_basement_aux (')':xs) f i = first_basement_aux xs (f-1) (i+1)
-first_basement_aux ('(':xs) f i = first_basement_aux xs (f+1) (i+1)
+fb_aux :: [Char] -> Int -> Int -> Int
+fb_aux [] _ _ = -1
+fb_aux (')':_) 0 i = i
+fb_aux (')':xs) f i = fb_aux xs (f-1) (i+1)
+fb_aux ('(':xs) f i = fb_aux xs (f+1) (i+1)
